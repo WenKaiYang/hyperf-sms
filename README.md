@@ -1,5 +1,5 @@
-# component-creator
+# 短信
 
-```
-composer create-project hyperf/component-creator
+```shell
+composer require ella123/hyperf-sms
 ```
