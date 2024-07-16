@@ -24,9 +24,9 @@ class PendingSms
      */
     protected string $to;
 
-    protected SmsManagerInterface $manger;
+    protected ?SmsManagerInterface $manger;
 
-    protected SenderInterface $sender;
+    protected ?SenderInterface $sender;
 
     public function __construct(SmsManagerInterface $manger)
     {
