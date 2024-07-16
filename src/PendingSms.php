@@ -24,13 +24,8 @@ class PendingSms
      */
     protected string $to;
 
-    protected ?SmsManagerInterface $manger;
-
-    protected ?SenderInterface $sender;
-
-    public function __construct(SmsManagerInterface $manger)
+    public function __construct(protected SmsManagerInterface $manger, protected ?SenderInterface $sender = null)
     {
-        $this->manger = $manger;
     }
 
     /**
@@ -46,7 +41,7 @@ class PendingSms
      */
     public function to(int|string $number): static
     {
-        $this->to = (string) $number;
+        $this->to = (string)$number;
 
         return $this;
     }
