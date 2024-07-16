@@ -15,7 +15,6 @@ namespace Ella123\HyperfSms;
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Contracts\SmsManagerInterface;
 use Hyperf\Context\ApplicationContext;
-use function Hyperf\Support\make;
 
 /**
  * @method static PendingSms to(int|string $number)
@@ -33,17 +32,13 @@ class Sms
         return $instance->{$method}(...$args);
     }
 
-    public static function sender(string $name)
+    public static function sender(string $name): PendingSms
     {
         return (new PendingSms(static::getManager()))->sender($name);
     }
 
-    protected static function getManager()
+    protected static function getManager(): SmsManagerInterface
     {
-        if (!ApplicationContext::getContainer()->has(SmsManagerInterface::class)) {
-            ApplicationContext::getContainer()->set(SmsManagerInterface::class, make(SmsManagerInterface::class));
-        }
-
         return ApplicationContext::getContainer()->get(SmsManagerInterface::class);
     }
 }
