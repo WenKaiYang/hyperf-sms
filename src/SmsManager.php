@@ -16,21 +16,19 @@ use Ella123\HyperfSms\Contracts\SenderInterface;
 use Ella123\HyperfSms\Contracts\ShouldQueue;
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Contracts\SmsManagerInterface;
-use Ella123\HyperfSms\Exceptions\InvalidMobileNumberException;
 use Ella123\HyperfSms\Exceptions\StrategicallySendMessageException;
 use Hyperf\Contract\ConfigInterface;
 use InvalidArgumentException;
 use LogicException;
 use Psr\Container\ContainerInterface;
 use Throwable;
+
 use function Hyperf\Support\make;
 
 class SmsManager implements SmsManagerInterface
 {
     /**
      * The container instance.
-     *
-     * @var ContainerInterface
      */
     protected ContainerInterface $container;
 

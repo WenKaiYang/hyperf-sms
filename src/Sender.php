@@ -20,6 +20,7 @@ use Ella123\HyperfSms\Events\SmsMessageSent;
 use Hyperf\Macroable\Macroable;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
+
 use function Hyperf\Support\make;
 
 class Sender implements SenderInterface
@@ -28,9 +29,6 @@ class Sender implements SenderInterface
 
     protected string $name;
 
-    /**
-     * @var DriverInterface
-     */
     protected DriverInterface $driver;
 
     protected ContainerInterface $container;
@@ -38,11 +36,10 @@ class Sender implements SenderInterface
     protected EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
-        string             $name,
-        array              $config,
+        string $name,
+        array $config,
         ContainerInterface $container
-    )
-    {
+    ) {
         $this->name = $name;
         $this->driver = make($config['driver'], ['config' => $config['config'] ?? []]);
         $this->eventDispatcher = $container->get(EventDispatcherInterface::class);

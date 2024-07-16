@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Ella123\HyperfSms;
 
 use Hyperf\Contract\Arrayable;
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -54,7 +55,7 @@ class Response implements ResponseInterface, Arrayable
         return call_user_func_array([$this->response, __FUNCTION__], func_get_args());
     }
 
-    public function withProtocolVersion($version): \Psr\Http\Message\MessageInterface
+    public function withProtocolVersion($version): MessageInterface
     {
         return call_user_func_array([$this->response, __FUNCTION__], func_get_args());
     }
@@ -74,22 +75,22 @@ class Response implements ResponseInterface, Arrayable
         return call_user_func_array([$this->response, __FUNCTION__], func_get_args());
     }
 
-    public function withHeader($name, $value): \Psr\Http\Message\MessageInterface
+    public function withHeader($name, $value): MessageInterface
     {
         return call_user_func_array([$this->response, __FUNCTION__], func_get_args());
     }
 
-    public function withAddedHeader($name, $value): \Psr\Http\Message\MessageInterface
+    public function withAddedHeader($name, $value): MessageInterface
     {
         return call_user_func_array([$this->response, __FUNCTION__], func_get_args());
     }
 
-    public function withoutHeader($name): \Psr\Http\Message\MessageInterface
+    public function withoutHeader($name): MessageInterface
     {
         return call_user_func_array([$this->response, __FUNCTION__], func_get_args());
     }
 
-    public function withBody(StreamInterface $body): \Psr\Http\Message\MessageInterface
+    public function withBody(StreamInterface $body): MessageInterface
     {
         return call_user_func_array([$this->response, __FUNCTION__], func_get_args());
     }

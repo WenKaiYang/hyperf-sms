@@ -21,19 +21,11 @@ class PendingSms
 {
     /**
      * The "to" recipient of the message.
-     *
-     * @var string
      */
     protected string $to;
 
-    /**
-     * @var SmsManagerInterface
-     */
     protected SmsManagerInterface $manger;
 
-    /**
-     * @var SenderInterface
-     */
     protected SenderInterface $sender;
 
     public function __construct(SmsManagerInterface $manger)
@@ -54,7 +46,7 @@ class PendingSms
      */
     public function to(int|string $number): static
     {
-        $this->to = (string)$number;
+        $this->to = (string) $number;
 
         return $this;
     }
@@ -72,7 +64,7 @@ class PendingSms
     /**
      * Send a new SMS message instance.
      */
-    public function send(SmsableInterface $smsable): bool|array
+    public function send(SmsableInterface $smsable): array|bool
     {
         return $this->manger->send($this->fill($smsable));
     }

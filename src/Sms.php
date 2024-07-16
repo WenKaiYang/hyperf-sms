@@ -15,6 +15,7 @@ namespace Ella123\HyperfSms;
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Contracts\SmsManagerInterface;
 use Hyperf\Context\ApplicationContext;
+
 use function Hyperf\Support\make;
 
 /**
@@ -40,7 +41,7 @@ class Sms
 
     protected static function getManager()
     {
-        if (!ApplicationContext::getContainer()->has(SmsManagerInterface::class)) {
+        if (! ApplicationContext::getContainer()->has(SmsManagerInterface::class)) {
             ApplicationContext::getContainer()->set(SmsManagerInterface::class, make(SmsManagerInterface::class));
         }
 

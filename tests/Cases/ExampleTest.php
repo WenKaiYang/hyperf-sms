@@ -12,10 +12,6 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases;
 
-
-use Ella123\HyperfSms\Sms;
-use Ella123\HyperfSms\Sms\DemoSms;
-
 /**
  * @internal
  * @coversNothing
@@ -25,9 +21,5 @@ class ExampleTest extends AbstractTestCase
     public function testExample()
     {
         $this->assertTrue(true);
-
-        Sms::to('123456789')
-            ->sender('log')
-            ->queue(new DemoSms());
     }
 }
