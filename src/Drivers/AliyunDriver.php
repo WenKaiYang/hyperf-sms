@@ -60,7 +60,10 @@ class AliyunDriver extends AbstractDriver
             throw new DriverErrorException($result['Message'], $result['Code'], $response);
         }
 
-        return $result;
+        return [
+            'result' => $result,
+            'driver' => 'aliyun',
+        ];
     }
 
     protected function generateSign(array $params): string

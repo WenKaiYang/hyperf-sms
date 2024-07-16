@@ -34,7 +34,7 @@ class LogDriver extends AbstractDriver
     public function send(SmsableInterface $smsable): array
     {
         $log = sprintf(
-            "To: %s | From: %s | Content: \"%s\" | Signature: \"%s\" | Data: %s\n",
+            "To: %s | From: \"%s\" | Content: \"%s\" | Signature: \"%s\" | Data: %s\n",
             $smsable->to,
             $smsable->from,
             $smsable->content,
@@ -45,13 +45,14 @@ class LogDriver extends AbstractDriver
         $this->logger->info($log);
 
         return [
-            'code' => 0,
-            'title' => 'log',
-            'to' => $smsable->to,
-            'from' => $smsable->from,
-            'content' => $smsable->content,
-            'signature' => $smsable->signature,
-            'data' => $smsable->data,
+            'result' => [
+                'to' => $smsable->to,
+                'from' => $smsable->from,
+                'content' => $smsable->content,
+                'signature' => $smsable->signature,
+                'data' => $smsable->data,
+            ],
+            'driver' => 'log',
         ];
     }
 }
