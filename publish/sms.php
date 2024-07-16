@@ -18,7 +18,7 @@ return [
 
     'default' => [
         'strategy' => OrderStrategy::class,
-        'senders' => ['aliyun', 'tencent_cloud'],
+        'senders' => ['log', 'aliyun'],
     ],
 
     'senders' => [

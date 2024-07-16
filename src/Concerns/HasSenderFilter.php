@@ -16,7 +16,8 @@ trait HasSenderFilter
 {
     protected function filterSenders(array $senders, string $number): array
     {
-        $region = strtolower($number->getRegionCode());
+        // 地区
+        $region = '';
         $output = [];
         foreach ($senders as $key => $value) {
             if (is_array($value)) {
