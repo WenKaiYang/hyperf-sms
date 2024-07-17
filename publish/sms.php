@@ -12,6 +12,7 @@ declare(strict_types=1);
 use Ella123\HyperfSms\Drivers\AliyunDriver;
 use Ella123\HyperfSms\Drivers\LogDriver;
 use Ella123\HyperfSms\Strategies\OrderStrategy;
+use function Hyperf\Support\env;
 
 return [
     'timeout' => 5.0,
@@ -25,17 +26,17 @@ return [
         'aliyun' => [
             'driver' => AliyunDriver::class,
             'config' => [
-                'access_key_id' => '',
-                'access_key_secret' => '',
-                'sign_name' => '',
+                'access_key_id' => env('SMS_ALIYUN_ACCESS_KEY_ID'),
+                'access_key_secret' => env('SMS_ALIYUN_ACCESS_KEY_SECRET'),
+                'sign_name' => env('SMS_ALIYUN_SIGN_NAME'),
             ],
         ],
 
         'log' => [
             'driver' => LogDriver::class,
             'config' => [
-                'name' => 'sms',
-                'group' => 'default',
+                'name' => env('SMS_LOG_NAME', 'sms'),
+                'group' => env('SMS_LOG_GROUP', 'default'),
             ],
         ],
     ],
