@@ -41,7 +41,7 @@ class PendingSms
      */
     public function to(int|string $number): static
     {
-        $this->to = (string)$number;
+        $this->to = (string) $number;
 
         return $this;
     }

@@ -21,6 +21,7 @@ use Hyperf\AsyncQueue\Driver\DriverFactory;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Contract\CompressInterface;
 use Hyperf\Contract\UnCompressInterface;
+
 use function Hyperf\Config\config;
 
 abstract class Smsable implements SmsableInterface, CompressInterface, UnCompressInterface
@@ -165,7 +166,7 @@ abstract class Smsable implements SmsableInterface, CompressInterface, UnCompres
     {
         $queue = $queue ?: (property_exists($this, 'queue') ? $this->queue : array_key_first(config('async_queue')));
 
-        return ApplicationContext::getContainer()->get(DriverFactory::class)->get($queue)->push($job, (int)$delay);
+        return ApplicationContext::getContainer()->get(DriverFactory::class)->get($queue)->push($job, (int) $delay);
     }
 
     /**

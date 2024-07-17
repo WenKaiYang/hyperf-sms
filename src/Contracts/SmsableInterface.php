@@ -64,9 +64,6 @@ interface SmsableInterface
     /**
      * Set the SMS message data.
      *
-     * @param array|string $key
-     * @param mixed|null $value
-     *
      * @return $this
      */
     public function with(array|string $key, mixed $value = null): static;
