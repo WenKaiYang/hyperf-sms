@@ -26,8 +26,8 @@ class LogDriver extends AbstractDriver
         parent::__construct($config);
 
         $this->logger = $container->get(LoggerFactory::class)->get(
-            $options['name'] ?? 'sms',
-            $options['group'] ?? 'default'
+            name: $config['name'] ?? 'sms',
+            group: $config['group'] ?? 'default'
         );
     }
 
