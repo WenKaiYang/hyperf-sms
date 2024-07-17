@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Ella123\HyperfSms;
+namespace Ella123\HyperfSms\Jobs;
 
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Hyperf\AsyncQueue\Job;

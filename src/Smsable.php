@@ -15,12 +15,12 @@ namespace Ella123\HyperfSms;
 use Ella123\HyperfSms\Contracts\SenderInterface;
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Contracts\SmsManagerInterface;
+use Ella123\HyperfSms\Jobs\QueuedSmsableJob;
 use Ella123\HyperfSms\Strategies\OrderStrategy;
 use Hyperf\AsyncQueue\Driver\DriverFactory;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Contract\CompressInterface;
 use Hyperf\Contract\UnCompressInterface;
-
 use function Hyperf\Config\config;
 
 abstract class Smsable implements SmsableInterface, CompressInterface, UnCompressInterface
