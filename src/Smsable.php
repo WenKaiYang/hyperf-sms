@@ -28,42 +28,42 @@ abstract class Smsable implements SmsableInterface, CompressInterface, UnCompres
     /**
      * @var string
      */
-    public $strategy = OrderStrategy::class;
+    public string $strategy = OrderStrategy::class;
 
     /**
      * @var string[]
      */
-    public $senders;
+    public array $senders = [];
 
     /**
      * @var string
      */
-    public $sender;
+    public string $sender = '';
 
     /**
      * @var string
      */
-    public $from;
+    public string $from = '';
 
     /**
      * @var string
      */
-    public $to;
+    public string $to = '';
 
     /**
      * @var string
      */
-    public $content;
+    public string $content = '';
 
     /**
      * @var string
      */
-    public $template;
+    public string $template = '';
 
     /**
      * @var string
      */
-    public $signature;
+    public string $signature = '';
 
     /**
      * @var array
@@ -105,7 +105,7 @@ abstract class Smsable implements SmsableInterface, CompressInterface, UnCompres
         return $this;
     }
 
-    public function with($key, $value = null): static
+    public function with(array|string $key, mixed $value = null): static
     {
         if (is_array($key)) {
             $this->data = array_merge($this->data, $key);
@@ -189,7 +189,7 @@ abstract class Smsable implements SmsableInterface, CompressInterface, UnCompres
     {
         $queue = $queue ?: (property_exists($this, 'queue') ? $this->queue : array_key_first(config('async_queue')));
 
-        return ApplicationContext::getContainer()->get(DriverFactory::class)->get($queue)->push($job, (int) $delay);
+        return ApplicationContext::getContainer()->get(DriverFactory::class)->get($queue)->push($job, (int)$delay);
     }
 
     /**

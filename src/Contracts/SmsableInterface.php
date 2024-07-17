@@ -31,52 +31,52 @@ interface SmsableInterface
      *
      * @return $this
      */
-    public function from(string $from);
+    public function from(string $from): static;
 
     /**
      * Set the SMS message recipient number.
      *
      * @return $this
      */
-    public function to(string $to);
+    public function to(string $to): static;
 
     /**
      * Set the SMS message content.
      *
      * @return $this
      */
-    public function content(string $content);
+    public function content(string $content): static;
 
     /**
      * Set the SMS message template.
      *
      * @return $this
      */
-    public function template(string $template);
+    public function template(string $template): static;
 
     /**
      * Set the SMS message signature.
      *
      * @return $this
      */
-    public function signature(string $signature);
+    public function signature(string $signature): static;
 
     /**
      * Set the SMS message data.
      *
      * @param array|string $key
-     * @param null|mixed $value
+     * @param mixed|null $value
      *
      * @return $this
      */
-    public function with($key, $value = null);
+    public function with(array|string $key, mixed $value = null): static;
 
     /**
      * Set the strategy.
      *
      * @return $this
      */
-    public function strategy(string $class);
+    public function strategy(string $class): static;
 
     /**
      * Set the list of sender name of the SMS message.
@@ -85,14 +85,14 @@ interface SmsableInterface
      *
      * @return $this
      */
-    public function senders(array $names);
+    public function senders(array $names): static;
 
     /**
      * Set the sender name of the SMS message. This will override `$senders` property value.
      *
      * @return $this
      */
-    public function sender(string $name);
+    public function sender(string $name): static;
 
     /**
      * Send the SMS message immediately.
