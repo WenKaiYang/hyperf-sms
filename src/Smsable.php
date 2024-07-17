@@ -25,45 +25,21 @@ use function Hyperf\Config\config;
 
 abstract class Smsable implements SmsableInterface, CompressInterface, UnCompressInterface
 {
-    /**
-     * @var string
-     */
     public string $strategy = OrderStrategy::class;
 
-    /**
-     * @var string[]
-     */
     public array $senders = [];
 
-    /**
-     * @var string
-     */
-    public string $sender = '';
+    public ?string $sender = null;
 
-    /**
-     * @var string
-     */
-    public string $from = '';
+    public ?string $from = null;
 
-    /**
-     * @var string
-     */
-    public string $to = '';
+    public ?string $to = null;
 
-    /**
-     * @var string
-     */
-    public string $content = '';
+    public ?string $content = null;
 
-    /**
-     * @var string
-     */
-    public string $template = '';
+    public ?string $template = null;
 
-    /**
-     * @var string
-     */
-    public string $signature = '';
+    public ?string $signature = null;
 
     /**
      * @var array
