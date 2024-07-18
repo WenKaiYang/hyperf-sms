@@ -52,7 +52,7 @@ class ItniotechDriver extends AbstractDriver
 
         if (($result['status'] ?? '-1') != 0) {
             throw new DriverErrorException(
-                message: $result['reason'] ?? 'Itniotech send fail',
+                message: $result['reason'] ?: $this->getMessage($result['status']),
                 code: (int) $result['status'],
                 response: $response
             );
@@ -64,5 +64,26 @@ class ItniotechDriver extends AbstractDriver
             'message_id' => $result['array'][0]['msgId'] ?? '',
             'params' => $params,
         ];
+    }
+
+    protected function getMessage($status): string
+    {
+        return match ((int) $status) {
+            -1 => 'Authentication error',
+            -2 => 'Restricted IP access',
+            -3 => 'Sensitive characters in SMS content',
+            -4 => 'SMS content is empty',
+            -5 => 'The SMS content is too long',
+            -6 => 'SMS that is not a template',
+            -7 => 'Phone number exceeds limit',
+            -8 => 'The phone number is empty',
+            -9 => 'Abnormal phone number',
+            -10 => "The customer's balance is insufficient",
+            -13 => 'User locked',
+            -16 => 'Timestamp expires',
+            -18 => 'port program unusual',
+            -19 => 'Please contact the business managers binding channel',
+            default => 'Itniotech send fail',
+        };
     }
 }
