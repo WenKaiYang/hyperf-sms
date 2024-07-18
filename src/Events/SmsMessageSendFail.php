@@ -13,12 +13,19 @@ declare(strict_types=1);
 namespace Ella123\HyperfSms\Events;
 
 use Ella123\HyperfSms\Contracts\SmsableInterface;
+use Ella123\HyperfSms\Exceptions\DriverErrorException;
 use Error;
 use Exception;
+use Psr\Http\Message\ResponseInterface;
 
 class SmsMessageSendFail
 {
+    public ?ResponseInterface $response = null;
+
     public function __construct(public SmsableInterface $smsable, public Error|Exception $exception)
     {
+        if ($this->exception instanceof DriverErrorException) {
+            $this->response = $this->exception->response;
+        }
     }
 }

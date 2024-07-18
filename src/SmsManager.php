@@ -18,18 +18,14 @@ use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Contracts\SmsManagerInterface;
 use Ella123\HyperfSms\Exceptions\StrategicallySendMessageException;
 use Hyperf\Contract\ConfigInterface;
-use Hyperf\Logger\LoggerFactory;
 use InvalidArgumentException;
 use LogicException;
 use Psr\Container\ContainerInterface;
-use Psr\Log\LoggerInterface;
 use Throwable;
 
 class SmsManager implements SmsManagerInterface
 {
     protected ContainerInterface $container;
-
-    protected LoggerInterface $logger;
 
     protected array $senders = [];
 
@@ -42,10 +38,6 @@ class SmsManager implements SmsManagerInterface
     {
         $this->container = $container;
         $this->config = $container->get(ConfigInterface::class)->get('sms');
-        $this->logger = $container->get(LoggerFactory::class)->get(
-            name: $this->config['senders']['log']['config']['name'] ?? 'sms',
-            group: $this->config['senders']['log']['config']['group'] ?? 'default'
-        );
     }
 
     public function get(string $name): SenderInterface
@@ -67,15 +59,6 @@ class SmsManager implements SmsManagerInterface
             try {
                 return $smsable->send($this->get($sender));
             } catch (Throwable $throwable) {
-                $this->logger->error(sprintf(
-                    '%s[%s] in %s%s%s',
-                    $throwable->getMessage(),
-                    $throwable->getLine(),
-                    $throwable->getFile(),
-                    PHP_EOL,
-                    $throwable->getTraceAsString()
-                ));
-
                 $exception = empty($exception)
                     ? new StrategicallySendMessageException('The SMS manger encountered some errors on strategically send the message', $throwable)
                     : $exception->appendStack($exception);
@@ -106,7 +89,7 @@ class SmsManager implements SmsManagerInterface
 
     public function to(int|string $number): PendingSms
     {
-        return (new PendingSms($this))->to((string) $number);
+        return (new PendingSms($this))->to((string)$number);
     }
 
     /**
@@ -128,7 +111,7 @@ class SmsManager implements SmsManagerInterface
         $senders = (is_array($smsable->senders) && count($smsable->senders) > 0)
             ? $smsable->senders
             : (
-                is_array($this->config['default']['senders'])
+            is_array($this->config['default']['senders'])
                 ? $this->config['default']['senders']
                 : [$this->config['default']['senders']]
             );
