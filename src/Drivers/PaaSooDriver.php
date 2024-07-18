@@ -31,7 +31,7 @@ class PaaSooDriver extends AbstractDriver
         $params = [
             'key' => $appKey,
             'secret' => $secretKey,
-            'from' => $smsable->signature,
+            'from' => $smsable->from ?: $smsable->signature,
             'to' => $smsable->to,
             'text' => $smsable->content,
         ];

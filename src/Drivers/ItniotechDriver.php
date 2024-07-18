@@ -34,7 +34,7 @@ class ItniotechDriver extends AbstractDriver
             'appId' => $appId,
             'numbers' => $smsable->to,
             'content' => $smsable->content,
-            'senderId' => $smsable->signature,
+            'senderId' => $smsable->from ?: $smsable->signature,
         ];
 
         $response = $this->client->postJson(
