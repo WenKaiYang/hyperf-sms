@@ -14,7 +14,12 @@ namespace Ella123\HyperfSms\Drivers;
 
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Exceptions\DriverErrorException;
+use function Hyperf\Support\class_basename;
 
+/**
+ * 阿里短信渠道
+ * @see https://help.aliyun.com/zh/sms/developer-reference/api-dysmsapi-2017-05-25-sendsms?spm=a2c4g.101414.0.i0
+ */
 class AliyunDriver extends AbstractDriver
 {
     protected const ENDPOINT_URL = 'https://dysmsapi.aliyuncs.com';
@@ -62,7 +67,9 @@ class AliyunDriver extends AbstractDriver
 
         return [
             'result' => $result,
-            'driver' => 'aliyun',
+            'driver' => strtolower(class_basename(__CLASS__)),
+            'message_id' => $result['BizId'] ?? '',
+            'params' => $params,
         ];
     }
 

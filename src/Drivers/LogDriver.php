@@ -16,6 +16,7 @@ use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use function Hyperf\Support\class_basename;
 
 class LogDriver extends AbstractDriver
 {
@@ -45,14 +46,16 @@ class LogDriver extends AbstractDriver
         $this->logger->info($log);
 
         return [
-            'result' => [
+            'result' => [],
+            'driver' => strtolower(class_basename(__CLASS__)),
+            'message_id' => '',
+            'params' => [
                 'to' => $smsable->to,
                 'from' => $smsable->from,
                 'content' => $smsable->content,
                 'signature' => $smsable->signature,
                 'data' => $smsable->data,
             ],
-            'driver' => 'log',
         ];
     }
 }

@@ -16,7 +16,7 @@ use Ella123\HyperfSms\Contracts\SmsableInterface;
 
 class SmsMessageSent
 {
-    public function __construct(public SmsableInterface $smsable)
+    public function __construct(public SmsableInterface $smsable, public array $response)
     {
     }
 }
