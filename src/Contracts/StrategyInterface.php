@@ -17,5 +17,5 @@ interface StrategyInterface
     /**
      * Apply the strategy and return results.
      */
-    public function apply(array $senders, string $number): array;
+    public function apply(array $senders, ?string $number = null): array;
 }

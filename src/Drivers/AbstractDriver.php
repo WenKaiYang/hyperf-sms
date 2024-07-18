@@ -18,15 +18,9 @@ use Hyperf\Config\Config;
 
 abstract class AbstractDriver implements DriverInterface
 {
-    /**
-     * @var Client
-     */
-    protected $client;
+    protected Client $client;
 
-    /**
-     * @var Config
-     */
-    protected $config;
+    protected Config $config;
 
     /**
      * The driver constructor.

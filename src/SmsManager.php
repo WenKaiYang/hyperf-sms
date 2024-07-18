@@ -22,6 +22,7 @@ use InvalidArgumentException;
 use LogicException;
 use Psr\Container\ContainerInterface;
 use Throwable;
+
 use function Hyperf\Support\make;
 
 class SmsManager implements SmsManagerInterface
@@ -90,7 +91,7 @@ class SmsManager implements SmsManagerInterface
 
     public function to(int|string $number): PendingSms
     {
-        return (new PendingSms($this))->to((string)$number);
+        return (new PendingSms($this))->to((string) $number);
     }
 
     /**
@@ -112,7 +113,7 @@ class SmsManager implements SmsManagerInterface
         $senders = (is_array($smsable->senders) && count($smsable->senders) > 0)
             ? $smsable->senders
             : (
-            is_array($this->config['default']['senders'])
+                is_array($this->config['default']['senders'])
                 ? $this->config['default']['senders']
                 : [$this->config['default']['senders']]
             );

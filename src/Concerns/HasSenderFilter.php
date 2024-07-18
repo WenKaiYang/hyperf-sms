@@ -14,7 +14,7 @@ namespace Ella123\HyperfSms\Concerns;
 
 trait HasSenderFilter
 {
-    protected function filterSenders(array $senders, string $number): array
+    protected function filterSenders(array $senders, ?string $number = null): array
     {
         // 地区
         $region = '';

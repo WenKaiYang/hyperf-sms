@@ -19,7 +19,7 @@ class OrderStrategy implements StrategyInterface
 {
     use HasSenderFilter;
 
-    public function apply(array $senders, string $number): array
+    public function apply(array $senders, ?string $number = null): array
     {
         return array_values($this->filterSenders($senders, $number));
     }
