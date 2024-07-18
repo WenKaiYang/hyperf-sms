@@ -98,7 +98,7 @@ class SmsManager implements SmsManagerInterface
         throw $exception;
     }
 
-    public function send(SmsableInterface $smsable)
+    public function send(SmsableInterface $smsable): array|bool
     {
         if ($smsable instanceof ShouldQueue) {
             return $smsable->queue();

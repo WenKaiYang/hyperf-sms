@@ -25,10 +25,8 @@ interface SmsManagerInterface
 
     /**
      * Send the given message.
-     *
-     * @return array|bool
      */
-    public function send(SmsableInterface $smsable);
+    public function send(SmsableInterface $smsable): array|bool;
 
     /**
      * Queue the message for sending.
