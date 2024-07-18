@@ -15,8 +15,11 @@ namespace Ella123\HyperfSms;
 use Ella123\HyperfSms\Contracts\DriverInterface;
 use Ella123\HyperfSms\Contracts\SenderInterface;
 use Ella123\HyperfSms\Contracts\SmsableInterface;
+use Ella123\HyperfSms\Events\SmsMessageSendFail;
 use Ella123\HyperfSms\Events\SmsMessageSending;
 use Ella123\HyperfSms\Events\SmsMessageSent;
+use Error;
+use Exception;
 use Hyperf\Macroable\Macroable;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -51,18 +54,26 @@ class Sender implements SenderInterface
         return $this->name;
     }
 
+    /**
+     * @throws Error|Exception
+     */
     public function send(SmsableInterface $smsable): array
     {
-        $smsable = clone $smsable;
+        try {
+            $smsable = clone $smsable;
 
-        call_user_func([$smsable, 'build'], $this);
+            call_user_func([$smsable, 'build'], $this);
 
-        $this->eventDispatcher->dispatch(new SmsMessageSending($smsable));
+            $this->eventDispatcher->dispatch(new SmsMessageSending($smsable));
 
-        $result = $this->driver->send($smsable);
+            $result = $this->driver->send($smsable);
 
-        $this->eventDispatcher->dispatch(new SmsMessageSent($smsable, $result));
+            $this->eventDispatcher->dispatch(new SmsMessageSent($smsable, $result));
 
-        return $result;
+            return $result;
+        } catch (Error|Exception $exception) {
+            $this->eventDispatcher->dispatch(new SmsMessageSendFail($smsable, $exception));
+            throw $exception;
+        }
     }
 }
