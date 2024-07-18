@@ -19,7 +19,7 @@ class RandomStrategy implements StrategyInterface
 {
     use HasSenderFilter;
 
-    public function apply(array $senders, string $number): array
+    public function apply(array $senders, ?string $number = null): array
     {
         $senders = $this->filterSenders($senders, $number);
 
