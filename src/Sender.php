@@ -62,7 +62,9 @@ class Sender implements SenderInterface
         try {
             $smsable = clone $smsable;
 
-            call_user_func([$smsable, 'build'], $this);
+            if (method_exists($smsable, 'build')) {
+                call_user_func([$smsable, 'build'], $this);
+            }
 
             $this->eventDispatcher->dispatch(new SmsMessageSending($smsable));
 
