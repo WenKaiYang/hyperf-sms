@@ -22,27 +22,17 @@ use Hyperf\Logger\LoggerFactory;
 use InvalidArgumentException;
 use LogicException;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class SmsManager implements SmsManagerInterface
 {
-    /**
-     * The container instance.
-     */
     protected ContainerInterface $container;
 
-    /**
-     * The array of resolved senders.
-     *
-     * @var SenderInterface[]
-     */
+    protected LoggerInterface $logger;
+
     protected array $senders = [];
 
-    /**
-     * The config instance.
-     *
-     * @var array
-     */
     protected mixed $config;
 
     /**
@@ -52,6 +42,10 @@ class SmsManager implements SmsManagerInterface
     {
         $this->container = $container;
         $this->config = $container->get(ConfigInterface::class)->get('sms');
+        $this->logger = $container->get(LoggerFactory::class)->get(
+            name: $this->config['senders']['log']['config']['name'] ?? 'sms',
+            group: $this->config['senders']['log']['config']['group'] ?? 'default'
+        );
     }
 
     public function get(string $name): SenderInterface
@@ -73,19 +67,14 @@ class SmsManager implements SmsManagerInterface
             try {
                 return $smsable->send($this->get($sender));
             } catch (Throwable $throwable) {
-                $this->container->get(LoggerFactory::class)
-                    ->get(
-                        name: $this->config['senders']['log']['config']['name'] ?? 'sms',
-                        group: $this->config['senders']['log']['config']['group'] ?? 'default'
-                    )
-                    ->error(sprintf(
-                        '%s[%s] in %s%s%s',
-                        $throwable->getMessage(),
-                        $throwable->getLine(),
-                        $throwable->getFile(),
-                        PHP_EOL,
-                        $throwable->getTraceAsString()
-                    ));
+                $this->logger->error(sprintf(
+                    '%s[%s] in %s%s%s',
+                    $throwable->getMessage(),
+                    $throwable->getLine(),
+                    $throwable->getFile(),
+                    PHP_EOL,
+                    $throwable->getTraceAsString()
+                ));
 
                 $exception = empty($exception)
                     ? new StrategicallySendMessageException('The SMS manger encountered some errors on strategically send the message', $throwable)
