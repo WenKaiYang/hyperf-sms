@@ -31,7 +31,7 @@ class NXCloudDriver extends AbstractDriver
             'secretkey' => $secretKey,
             'phone' => $smsable->to,
             'content' => $smsable->content,
-            'source_address' => $smsable->signature,
+            'source_address' => $smsable->from ?: $smsable->signature,
         ];
 
         $response = $this->client->post(
