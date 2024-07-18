@@ -16,8 +16,6 @@ use Ella123\HyperfSms\Drivers\NXCloudDriver;
 use Ella123\HyperfSms\Drivers\PaaSooDriver;
 use Ella123\HyperfSms\Strategies\OrderStrategy;
 
-use function Hyperf\Support\env;
-
 return [
     'timeout' => 5.0,
 
