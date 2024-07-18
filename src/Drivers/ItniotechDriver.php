@@ -60,7 +60,7 @@ class ItniotechDriver extends AbstractDriver
 
         return [
             'result' => $result,
-            'driver' => strtolower(class_basename(__CLASS__)),
+            'driver' => class_basename(__CLASS__),
             'message_id' => $result['array'][0]['msgId'] ?? '',
             'params' => $params,
         ];

@@ -72,7 +72,7 @@ class AliyunDriver extends AbstractDriver
 
         return [
             'result' => $result,
-            'driver' => strtolower(class_basename(__CLASS__)),
+            'driver' => class_basename(__CLASS__),
             'message_id' => $result['BizId'] ?? '',
             'params' => $params,
         ];

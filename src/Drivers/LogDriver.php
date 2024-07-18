@@ -48,7 +48,7 @@ class LogDriver extends AbstractDriver
 
         return [
             'result' => [],
-            'driver' => strtolower(class_basename(__CLASS__)),
+            'driver' => class_basename(__CLASS__),
             'message_id' => '',
             'params' => [
                 'to' => $smsable->to,
