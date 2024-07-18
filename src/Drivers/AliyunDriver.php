@@ -14,10 +14,11 @@ namespace Ella123\HyperfSms\Drivers;
 
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Exceptions\DriverErrorException;
+
 use function Hyperf\Support\class_basename;
 
 /**
- * 阿里短信渠道
+ * 阿里短信渠道.
  * @see https://help.aliyun.com/zh/sms/developer-reference/api-dysmsapi-2017-05-25-sendsms?spm=a2c4g.101414.0.i0
  */
 class AliyunDriver extends AbstractDriver
@@ -64,7 +65,7 @@ class AliyunDriver extends AbstractDriver
         if ($result['Code'] != 'OK') {
             throw new DriverErrorException(
                 message: $result['Message'] ?? 'Aliyun send fail',
-                code: (int)$result['Code'],
+                code: (int) $result['Code'],
                 response: $response
             );
         }

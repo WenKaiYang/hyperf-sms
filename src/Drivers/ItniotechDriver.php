@@ -1,24 +1,34 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+
 namespace Ella123\HyperfSms\Drivers;
 
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Exceptions\DriverErrorException;
+
 use function Hyperf\Support\class_basename;
 
 /**
- * 颂量短信渠道
+ * 颂量短信渠道.
  * @see https://www.itniotech.cn/api/sms/sendSms/
  */
 class ItniotechDriver extends AbstractDriver
 {
-
     public function send(SmsableInterface $smsable): array
     {
         $timestamp = time();
-        $appKey = (string)$this->config->get('app_key');
-        $secretKey = (string)$this->config->get('secret_key');
-        $appId = (string)$this->config->get('app_id');
+        $appKey = (string) $this->config->get('app_key');
+        $secretKey = (string) $this->config->get('secret_key');
+        $appId = (string) $this->config->get('app_id');
 
         $params = [
             'appId' => $appId,
@@ -41,10 +51,9 @@ class ItniotechDriver extends AbstractDriver
         $result = $response->toArray();
 
         if (($result['status'] ?? '-1') != 0) {
-
             throw new DriverErrorException(
                 message: $result['reason'] ?? 'Itniotech send fail',
-                code: (int)$result['status'],
+                code: (int) $result['status'],
                 response: $response
             );
         }
