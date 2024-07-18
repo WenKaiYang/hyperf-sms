@@ -24,8 +24,6 @@ use LogicException;
 use Psr\Container\ContainerInterface;
 use Throwable;
 
-use function Hyperf\Support\make;
-
 class SmsManager implements SmsManagerInterface
 {
     /**
@@ -98,7 +96,7 @@ class SmsManager implements SmsManagerInterface
         throw $exception;
     }
 
-    public function send(SmsableInterface $smsable)
+    public function send(SmsableInterface $smsable): array|bool
     {
         if ($smsable instanceof ShouldQueue) {
             return $smsable->queue();

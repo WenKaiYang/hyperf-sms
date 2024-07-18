@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Ella123\HyperfSms;
 
-use Hyperf\Contract\Arrayable;
+use Hyperf\Utils\Contracts\Arrayable;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;

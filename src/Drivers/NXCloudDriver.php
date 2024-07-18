@@ -15,8 +15,6 @@ namespace Ella123\HyperfSms\Drivers;
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Exceptions\DriverErrorException;
 
-use function Hyperf\Support\class_basename;
-
 /**
  * 牛信短信渠道.
  * @see https://www.nxcloud.com/document/sms/mt-sending

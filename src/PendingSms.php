@@ -15,7 +15,7 @@ namespace Ella123\HyperfSms;
 use Ella123\HyperfSms\Contracts\SenderInterface;
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Contracts\SmsManagerInterface;
-use Hyperf\Context\ApplicationContext;
+use Hyperf\Utils\ApplicationContext;
 
 class PendingSms
 {

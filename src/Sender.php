@@ -21,8 +21,6 @@ use Hyperf\Macroable\Macroable;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
-use function Hyperf\Support\make;
-
 class Sender implements SenderInterface
 {
     use Macroable;

@@ -14,8 +14,8 @@ namespace Ella123\HyperfSms;
 
 use Ella123\HyperfSms\Exceptions\RequestException;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
-use Hyperf\Context\ApplicationContext;
 use Hyperf\Guzzle\ClientFactory;
+use Hyperf\Utils\ApplicationContext;
 
 class Client
 {

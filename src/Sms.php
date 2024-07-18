@@ -14,7 +14,7 @@ namespace Ella123\HyperfSms;
 
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Contracts\SmsManagerInterface;
-use Hyperf\Context\ApplicationContext;
+use Hyperf\Utils\ApplicationContext;
 
 /**
  * @method static PendingSms to(int|string $number)
