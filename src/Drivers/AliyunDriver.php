@@ -62,7 +62,11 @@ class AliyunDriver extends AbstractDriver
         $result = $response->toArray();
 
         if ($result['Code'] != 'OK') {
-            throw new DriverErrorException($result['Message'], $result['Code'], $response);
+            throw new DriverErrorException(
+                message: $result['Message'] ?? 'Aliyun send fail',
+                code: (int)$result['Code'],
+                response: $response
+            );
         }
 
         return [

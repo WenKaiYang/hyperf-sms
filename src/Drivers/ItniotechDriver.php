@@ -43,7 +43,7 @@ class ItniotechDriver extends AbstractDriver
         if (($result['status'] ?? '-1') != 0) {
 
             throw new DriverErrorException(
-                message: $result['reason'] ?? 'PaaSoo send fail',
+                message: $result['reason'] ?? 'Itniotech send fail',
                 code: (int)$result['status'],
                 response: $response
             );
