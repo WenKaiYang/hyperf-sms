@@ -59,10 +59,10 @@ class Sender implements SenderInterface
 
         $this->eventDispatcher->dispatch(new SmsMessageSending($smsable));
 
-        $response = $this->driver->send($smsable);
+        $result = $this->driver->send($smsable);
 
-        $this->eventDispatcher->dispatch(new SmsMessageSent($smsable, $response));
+        $this->eventDispatcher->dispatch(new SmsMessageSent($smsable, $result));
 
-        return $response;
+        return $result;
     }
 }
