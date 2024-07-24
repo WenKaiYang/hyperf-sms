@@ -10,6 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 use Ella123\HyperfSms\Drivers\AliyunDriver;
+use Ella123\HyperfSms\Drivers\DingTalkDriver;
 use Ella123\HyperfSms\Drivers\ItniotechDriver;
 use Ella123\HyperfSms\Drivers\LogDriver;
 use Ella123\HyperfSms\Drivers\NXCloudDriver;
@@ -62,6 +63,13 @@ return [
             'config' => [
                 'app_key' => env('SMS_PAASOO_APP_KEY'),
                 'secret_key' => env('SMS_PAASOO_SECRET_KEY'),
+            ],
+        ],
+        'dingtalk' => [
+            'driver' => DingTalkDriver::class,
+            'config' => [
+                'access_token' => env('SMS_DINGTALK_ACCESS_TOKEN'),
+                'secret_key' => env('SMS_DINGTALK_SECRET_KEY'),
             ],
         ],
     ],
