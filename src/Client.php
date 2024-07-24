@@ -75,9 +75,9 @@ class Client
      *
      * @throws RequestException
      */
-    public function postJson(string $endpoint, array $params = [], array $headers = []): Response
+    public function postJson(string $url, array $params = [], array $headers = []): Response
     {
-        return $this->request('post', $endpoint, [
+        return $this->request('post', $url, [
             'headers' => $headers,
             'json' => $params,
         ]);

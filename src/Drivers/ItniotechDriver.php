@@ -38,7 +38,7 @@ class ItniotechDriver extends AbstractDriver
         ];
 
         $response = $this->client->postJson(
-            endpoint: 'https://api.itniotech.com/sms/sendSms',
+            url: 'https://api.itniotech.com/sms/sendSms',
             params: $params,
             headers: [
                 'Content-Type' => 'application/json;charset=UTF-8',

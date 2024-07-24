@@ -42,7 +42,7 @@ class DingTalkDriver extends AbstractDriver
             ],
         ];
 
-        $response = $this->client->post(
+        $response = $this->client->postJson(
             url: sprintf(
                 'https://oapi.dingtalk.com/robot/send?access_token=%s&timestamp=%s&sign=%s',
                 $accessToken,
