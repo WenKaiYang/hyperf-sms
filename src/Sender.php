@@ -66,15 +66,15 @@ class Sender implements SenderInterface
                 call_user_func([$smsable, 'build'], $this);
             }
 
-            $this->eventDispatcher->dispatch(new SmsMessageSending($smsable));
+            $smsable->to && $this->eventDispatcher->dispatch(new SmsMessageSending($smsable));
 
             $result = $this->driver->send($smsable);
 
-            $this->eventDispatcher->dispatch(new SmsMessageSent($smsable, $result));
+            $smsable->to && $this->eventDispatcher->dispatch(new SmsMessageSent($smsable, $result));
 
             return $result;
         } catch (Error|Exception $exception) {
-            $this->eventDispatcher->dispatch(new SmsMessageSendFail($smsable, $exception));
+            $smsable->to && $this->eventDispatcher->dispatch(new SmsMessageSendFail($smsable, $exception));
             throw $exception;
         }
     }
