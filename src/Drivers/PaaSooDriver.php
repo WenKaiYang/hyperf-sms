@@ -23,8 +23,8 @@ class PaaSooDriver extends AbstractDriver
 {
     public function send(SmsableInterface $smsable): array
     {
-        $appKey = (string)$this->config->get('app_key');
-        $secretKey = (string)$this->config->get('secret_key');
+        $appKey = (string) $this->config->get('app_key');
+        $secretKey = (string) $this->config->get('secret_key');
 
         $params = [
             'key' => $appKey,
@@ -44,7 +44,7 @@ class PaaSooDriver extends AbstractDriver
         if (($result['status'] ?? '-1') != 0) {
             throw new DriverErrorException(
                 message: $result['status_code'] ?? 'PaaSoo send fail',
-                code: (int)$result['status'],
+                code: (int) $result['status'],
                 response: $response
             );
         }
