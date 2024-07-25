@@ -14,7 +14,6 @@ namespace Ella123\HyperfSms\Drivers;
 
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Exceptions\DriverErrorException;
-
 use function Hyperf\Support\class_basename;
 
 /**
@@ -25,8 +24,8 @@ class DingTalkDriver extends AbstractDriver
 {
     public function send(SmsableInterface $smsable): array
     {
-        $accessToken = (string) $this->config->get('access_token');
-        $secretKey = (string) $this->config->get('secret_key');
+        $accessToken = (string)$this->config->get('access_token');
+        $secretKey = (string)$this->config->get('secret_key');
         // 添加签名
         $timestamp = round(microtime(true) * 1000);
         $sign = $this->generateSignature($secretKey, $timestamp);
@@ -57,11 +56,12 @@ class DingTalkDriver extends AbstractDriver
         if (($result['errcode'] ?? '-1') != 0) {
             throw new DriverErrorException(
                 message: $result['errmsg'] ?? 'DingTalk send fail',
-                code: (int) $result['errcode'],
+                code: (int)$result['errcode'],
                 response: $response
             );
         }
 
+        $params['content'] = $smsable->content;
         return [
             'result' => $result,
             'driver' => class_basename(__CLASS__),

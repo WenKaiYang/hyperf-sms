@@ -51,6 +51,7 @@ class PaaSooDriver extends AbstractDriver
             );
         }
 
+        $params['content'] = $smsable->content;
         return [
             'result' => $result,
             'driver' => class_basename(__CLASS__),
