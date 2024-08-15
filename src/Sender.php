@@ -73,7 +73,7 @@ class Sender implements SenderInterface
 
             return $result;
         } catch (Error|Exception $exception) {
-            $smsable->to && $this->eventDispatcher->dispatch(new SmsMessageSendFail($smsable, $exception));
+            $this->eventDispatcher->dispatch(new SmsMessageSendFail($smsable, $exception));
             throw $exception;
         }
     }
