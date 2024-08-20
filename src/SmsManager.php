@@ -16,11 +16,13 @@ use Ella123\HyperfSms\Contracts\SenderInterface;
 use Ella123\HyperfSms\Contracts\ShouldQueue;
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Contracts\SmsManagerInterface;
+use Ella123\HyperfSms\Events\SmsManagerBeforeInit;
 use Ella123\HyperfSms\Exceptions\StrategicallySendMessageException;
 use Hyperf\Contract\ConfigInterface;
 use InvalidArgumentException;
 use LogicException;
 use Psr\Container\ContainerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 
 class SmsManager implements SmsManagerInterface
@@ -37,6 +39,8 @@ class SmsManager implements SmsManagerInterface
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+        // 初始化之前
+        $container->get(EventDispatcherInterface::class)->dispatch(new SmsManagerBeforeInit());
         $this->config = $container->get(ConfigInterface::class)->get('sms');
     }
 
@@ -90,7 +94,7 @@ class SmsManager implements SmsManagerInterface
 
     public function to(int|string $number): PendingSms
     {
-        return (new PendingSms($this))->to((string) $number);
+        return (new PendingSms($this))->to((string)$number);
     }
 
     /**
@@ -112,7 +116,7 @@ class SmsManager implements SmsManagerInterface
         $senders = (is_array($smsable->senders) && count($smsable->senders) > 0)
             ? $smsable->senders
             : (
-                is_array($this->config['default']['senders'])
+            is_array($this->config['default']['senders'])
                 ? $this->config['default']['senders']
                 : [$this->config['default']['senders']]
             );
