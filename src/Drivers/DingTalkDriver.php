@@ -54,8 +54,8 @@ class DingTalkDriver extends AbstractDriver
 
         if (($result['errcode'] ?? '-1') != 0) {
             throw new DriverErrorException(
-                message: $result['errmsg'] ?? 'DingTalk send fail',
-                code: (int) $result['errcode'],
+                message: $this->getErrorMessage($result),
+                code: (int)$result['errcode'],
                 response: $response
             );
         }
@@ -75,5 +75,26 @@ class DingTalkDriver extends AbstractDriver
         $hash = hash_hmac('sha256', $stringToSign, $secret, true);
         $sign = base64_encode($hash);
         return urlencode($sign);
+    }
+
+    protected function getErrorMessage(array $result): string
+    {
+        return match (intval($result['errcode'])) {
+            -1 => '系统繁忙',
+            40035 => '缺少参数 json',
+            43004 => '无效的HTTP HEADER Content-Type',
+            400013 => '群已被解散',
+            400101 => 'access_token不存在',
+            400102 => '机器人已停用',
+            400105 => '不支持的消息类型',
+            400106 => '机器人不存在',
+            410100 => '发送速度太快而限流',
+            430101 => '含有不安全的外链',
+            430102 => '含有不合适的文本',
+            430103 => '含有不合适的图片',
+            430104 => '含有不合适的内容',
+            310000 => '安全设置错误码',
+            default => $result['errmsg'] ?? '',
+        };
     }
 }
