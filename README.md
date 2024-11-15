@@ -68,5 +68,13 @@ php bin/hyperf.php vendor:publish ella123/hyperf-sms
         'secret_key' => env('SMS_PAASOO_SECRET_KEY'),
     ],
 ],
+// 英富必短信渠道
+'infobip' => [
+    'driver' => InfobipDriver::class,
+    'config' => [
+        'api_url' => env('SMS_INFOBIP_API_URL', '****.api.infobip.com'),
+        'api_token' => env('SMS_DINGTALK_API_TOKEN'),
+    ],
+],
 ```
 
