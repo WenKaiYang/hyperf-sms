@@ -10,6 +10,12 @@ composer require ella123/hyperf-sms
 php bin/hyperf.php vendor:publish ella123/hyperf-sms
 ```
 
+# 创建短信类
+
+```shell
+php bin/hyperf.php gen:sms DemoSms
+```
+
 # 使用案例
 
 ```php
