@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * This file is part of Hyperf.
  *
@@ -9,8 +10,10 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 use Ella123\HyperfSms\Drivers\AliyunDriver;
 use Ella123\HyperfSms\Drivers\DingTalkDriver;
+use Ella123\HyperfSms\Drivers\InfobipDriver;
 use Ella123\HyperfSms\Drivers\ItniotechDriver;
 use Ella123\HyperfSms\Drivers\LogDriver;
 use Ella123\HyperfSms\Drivers\NXCloudDriver;
@@ -68,6 +71,13 @@ return [
             'config' => [
                 'access_token' => env('SMS_DINGTALK_ACCESS_TOKEN'),
                 'secret_key' => env('SMS_DINGTALK_SECRET_KEY'),
+            ],
+        ],
+        'infobip' => [
+            'driver' => InfobipDriver::class,
+            'config' => [
+                'api_url' => env('SMS_INFOBIP_API_URL', '****.api.infobip.com'),
+                'api_token' => env('SMS_DINGTALK_API_TOKEN'),
             ],
         ],
     ],
