@@ -37,11 +37,10 @@ class Sender implements SenderInterface
     protected EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
-        string             $name,
-        array              $config,
+        string $name,
+        array $config,
         ContainerInterface $container
-    )
-    {
+    ) {
         $this->name = $name;
         $this->driver = make($config['driver'], ['config' => $config['config'] ?? []]);
         $this->eventDispatcher = $container->get(EventDispatcherInterface::class);

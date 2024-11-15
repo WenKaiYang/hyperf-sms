@@ -55,7 +55,7 @@ class DingTalkDriver extends AbstractDriver
         if (($result['errcode'] ?? '-1') != 0) {
             throw new DriverErrorException(
                 message: $this->getErrorMessage($result),
-                code: (int)$result['errcode'],
+                code: (int) $result['errcode'],
                 response: $response
             );
         }

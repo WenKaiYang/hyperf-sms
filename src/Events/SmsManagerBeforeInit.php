@@ -12,8 +12,6 @@ declare(strict_types=1);
 
 namespace Ella123\HyperfSms\Events;
 
-use Ella123\HyperfSms\Contracts\SmsableInterface;
-
 class SmsManagerBeforeInit
 {
     public function __construct()

@@ -14,6 +14,7 @@ namespace Ella123\HyperfSms\Drivers;
 
 use Ella123\HyperfSms\Contracts\SmsableInterface;
 use Ella123\HyperfSms\Exceptions\DriverErrorException;
+use Exception;
 
 /**
  * 英富必短信渠道.
@@ -23,17 +24,17 @@ class InfobipDriver extends AbstractDriver
 {
     public function send(SmsableInterface $smsable): array
     {
-        $apiUrl = (string)$this->config->get('api_url');
-        $apiToken = (string)$this->config->get('api_token');
+        $apiUrl = (string) $this->config->get('api_url');
+        $apiToken = (string) $this->config->get('api_token');
 
         $params = [
-            "messages" => [[
-                "destinations" => [[
-                    "to" => $smsable->to,
+            'messages' => [[
+                'destinations' => [[
+                    'to' => $smsable->to,
                 ]],
-                "from" => $smsable->from ?: $smsable->signature,
-                "text" => $smsable->content,
-            ]]
+                'from' => $smsable->from ?: $smsable->signature,
+                'text' => $smsable->content,
+            ]],
         ];
 
         $response = $this->client->postJson(
@@ -42,7 +43,7 @@ class InfobipDriver extends AbstractDriver
             headers: [
                 'Authorization' => sprintf('App %s', $apiToken),
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
             ]
         );
 
@@ -52,17 +53,15 @@ class InfobipDriver extends AbstractDriver
             return [
                 'result' => $result,
                 'driver' => class_basename(__CLASS__),
-                'message_id' => $result['messages']['messageId'] ?? '',
+                'message_id' => $result['messages'][0]['messageId'] ?? '',
                 'params' => $params,
             ];
-        } catch (\Exception $exception) {
-
+        } catch (Exception $exception) {
             throw new DriverErrorException(
                 message: $exception->getMessage(),
-                code: (int)$exception->getCode(),
+                code: (int) $exception->getCode(),
                 response: $response
             );
         }
     }
-
 }
