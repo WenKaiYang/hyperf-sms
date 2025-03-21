@@ -4,9 +4,16 @@
   "license": "MIT",
   "keywords": [
     "php",
-    "hyperf"
+    "hyperf",
+    "SMS",
+    "Aliyun(阿里短信渠道)",
+    "Infobip(英富必短信渠道)",
+    "Itniotech(颂量短信渠道)",
+    "NXCloud(牛信短信渠道)",
+    "PaaSoo(啪嗖短信渠道)",
+    "SunDexCloud(讯达云短信渠道)"
   ],
-  "description": "",
+  "description": "支持短信渠道有：Aliyun(阿里短信渠道)、Infobip(英富必短信渠道)、Itniotech(颂量短信渠道)、NXCloud(牛信短信渠道)、PaaSoo(啪嗖短信渠道)、SunDexCloud(讯达云短信渠道)等",
   "autoload": {
     "psr-4": {
       "Ella123\\HyperfSms\\": "src/"

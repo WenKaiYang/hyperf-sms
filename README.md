@@ -82,5 +82,13 @@ php bin/hyperf.php gen:sms DemoSms
         'api_token' => env('SMS_DINGTALK_API_TOKEN'),
     ],
 ],
+// 讯达云短信渠道
+'sundexcloud' => [
+    'driver' => SunDexCloudDriver::class,
+    'config' => [
+        'app_key' => env('SMS_SUNDEXCLOUD_APP_KEY'),
+        'secret_key' => env('SMS_SUNDEXCLOUD_SECRET_KEY'),
+    ],
+],
 ```
 

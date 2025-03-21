@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 use Ella123\HyperfSms\Drivers\AliyunDriver;
 use Ella123\HyperfSms\Drivers\DingTalkDriver;
 use Ella123\HyperfSms\Drivers\InfobipDriver;
@@ -16,6 +17,7 @@ use Ella123\HyperfSms\Drivers\ItniotechDriver;
 use Ella123\HyperfSms\Drivers\LogDriver;
 use Ella123\HyperfSms\Drivers\NXCloudDriver;
 use Ella123\HyperfSms\Drivers\PaaSooDriver;
+use Ella123\HyperfSms\Drivers\SunDexCloudDriver;
 use Ella123\HyperfSms\Strategies\OrderStrategy;
 
 return [
@@ -76,6 +78,13 @@ return [
             'config' => [
                 'api_url' => env('SMS_INFOBIP_API_URL', '****.api.infobip.com'),
                 'api_token' => env('SMS_DINGTALK_API_TOKEN'),
+            ],
+        ],
+        'sundexcloud' => [
+            'driver' => SunDexCloudDriver::class,
+            'config' => [
+                'app_key' => env('SMS_SUNDEXCLOUD_APP_KEY'),
+                'secret_key' => env('SMS_SUNDEXCLOUD_SECRET_KEY'),
             ],
         ],
     ],
